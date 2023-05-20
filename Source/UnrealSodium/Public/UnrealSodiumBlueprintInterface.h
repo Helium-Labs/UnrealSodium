@@ -2,6 +2,8 @@
 
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Engine.h"
+#include "HAL/Platform.h"
+#include "GenericPlatform/GenericPlatform.h"
 #include "UnrealSodiumBlueprintInterface.generated.h"
 
 UCLASS()
@@ -76,12 +78,11 @@ public:
 	static TArray<uint8> GenerateSymmetricNonce();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Sodium|Core")
-	static int SymmetricNonceLength();
+	static int64 SymmetricNonceLength();
 
 	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
 	static TArray<uint8> GenerateAsymmetricNonce();
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Sodium|Core")
-	static int AsymmetricNonceLength();
-
+	static int64 AsymmetricNonceLength();
 };

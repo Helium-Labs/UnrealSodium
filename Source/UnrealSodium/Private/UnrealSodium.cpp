@@ -38,22 +38,22 @@ void FUnrealSodiumModule::RandomBytes(unsigned char* bytes, size_t len) {
 // Asymmetric
 //////////////////////////////////////////////////////////////////////////
 
-int FUnrealSodiumModule::Encrypt(TArray<uint8>& encrypted, TArray<uint8>& data, TArray<uint8>& publicKey) {
+int32 FUnrealSodiumModule::Encrypt(TArray<uint8>& encrypted, TArray<uint8>& data, TArray<uint8>& publicKey) {
 	encrypted.SetNum(data.Num() + crypto_box_SEALBYTES);
 	return crypto_box_seal(encrypted.GetData(), data.GetData(), data.Num(), publicKey.GetData());
 }
 
-int FUnrealSodiumModule::Decrypt(TArray<uint8>& decrypted, TArray<uint8>& encrypted, TArray<uint8>& publicKey, TArray<uint8>& privateKey) {
+int32 FUnrealSodiumModule::Decrypt(TArray<uint8>& decrypted, TArray<uint8>& encrypted, TArray<uint8>& publicKey, TArray<uint8>& privateKey) {
 	decrypted.SetNum(encrypted.Num() - crypto_box_SEALBYTES);
 	return crypto_box_seal_open(decrypted.GetData(), encrypted.GetData(), encrypted.Num(), publicKey.GetData(), privateKey.GetData());
 }
 
-int FUnrealSodiumModule::EncryptAuthenticated(TArray<uint8>& encrypted, TArray<uint8>& data, TArray<uint8>& nonce, TArray<uint8>& publicKey, TArray<uint8>& privateKey) {
+int32 FUnrealSodiumModule::EncryptAuthenticated(TArray<uint8>& encrypted, TArray<uint8>& data, TArray<uint8>& nonce, TArray<uint8>& publicKey, TArray<uint8>& privateKey) {
 	encrypted.SetNum(data.Num() + crypto_box_MACBYTES);
 	return crypto_box_easy(encrypted.GetData(), data.GetData(), data.Num(), nonce.GetData(), publicKey.GetData(), privateKey.GetData());
 }
 
-int FUnrealSodiumModule::DecryptAuthenticated(TArray<uint8>& decrypted, TArray<uint8>& encrypted, TArray<uint8>& nonce, TArray<uint8>& publicKey, TArray<uint8>& privateKey) {
+int32 FUnrealSodiumModule::DecryptAuthenticated(TArray<uint8>& decrypted, TArray<uint8>& encrypted, TArray<uint8>& nonce, TArray<uint8>& publicKey, TArray<uint8>& privateKey) {
 	decrypted.SetNum(encrypted.Num() - crypto_box_MACBYTES);
 	return crypto_box_open_easy(decrypted.GetData(), encrypted.GetData(), encrypted.Num(), nonce.GetData(), publicKey.GetData(), privateKey.GetData());
 }
@@ -69,12 +69,12 @@ TArray<uint8> FUnrealSodiumModule::GenerateKey() {
 	return key;
 }
 
-int FUnrealSodiumModule::EncryptSymmetric(TArray<uint8>& encrypted, TArray<uint8>& data, TArray<uint8>& nonce, TArray<uint8>& key) {
+int32 FUnrealSodiumModule::EncryptSymmetric(TArray<uint8>& encrypted, TArray<uint8>& data, TArray<uint8>& nonce, TArray<uint8>& key) {
 	encrypted.SetNum(data.Num() + crypto_secretbox_MACBYTES);
 	return crypto_secretbox_easy(encrypted.GetData(), data.GetData(), data.Num(), nonce.GetData(), key.GetData());
 }
 
-int FUnrealSodiumModule::DecryptSymmetric(TArray<uint8>& decrypted, TArray<uint8>& encrypted, TArray<uint8>& nonce, TArray<uint8>& key) {
+int32 FUnrealSodiumModule::DecryptSymmetric(TArray<uint8>& decrypted, TArray<uint8>& encrypted, TArray<uint8>& nonce, TArray<uint8>& key) {
 	decrypted.SetNum(decrypted.Num() - crypto_secretbox_MACBYTES);
 	return crypto_secretbox_open_easy(decrypted.GetData(), encrypted.GetData(), encrypted.Num(), nonce.GetData(), key.GetData());
 }

@@ -202,11 +202,11 @@ void UUnrealSodiumPluginBPLibrary::DecryptStringSymmetric(TArray<uint8> encrypte
 	}
 }
 
-int UUnrealSodiumPluginBPLibrary::AsymmetricNonceLength() {
+int64 UUnrealSodiumPluginBPLibrary::AsymmetricNonceLength() {
 	return FUnrealSodiumModule::Get().GetAssymetricNonceLen();
 }
 
-int UUnrealSodiumPluginBPLibrary::SymmetricNonceLength() {
+int64 UUnrealSodiumPluginBPLibrary::SymmetricNonceLength() {
 	return FUnrealSodiumModule::Get().GetSymmetricNonceLen();
 }
 
