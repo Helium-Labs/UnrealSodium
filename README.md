@@ -1,4 +1,4 @@
-![UnrealSodium](https://raw.githubusercontent.com/helium-labs/UnrealSodium/master/logo.png)
+![UnrealSodium](https://raw.githubusercontent.com/Helium-Labs/UnrealSodium/master/logo.png)
 ============
 
 An easy to use public and private cryptography plugin for Unreal Engine 5 based on libsodium.
