@@ -23,6 +23,8 @@ Contributions are warmly welcomed to further enhance the compatibility and usabi
 
 # What exactly is the Libsodium Cryptography Library?
 
+![libsodium](https://raw.github.com/jedisct1/libsodium/master/logo.png)
+
 Libsodium is a modern, versatile software library designed for encryption, decryption, signatures, password hashing, and more.
 
 Originating as a fork of [NaCl](http://nacl.cr.yp.to/), it offers a compatible API and additional enhancements to further improve usability. Its goal is to offer core operations essential for the development of higher-level cryptographic tools.
