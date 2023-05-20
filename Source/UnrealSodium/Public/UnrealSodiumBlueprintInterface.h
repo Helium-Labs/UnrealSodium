@@ -1,11 +1,11 @@
 #pragma once
 
-//#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "Engine.h"
-#include "SodiumUE5BlueprintInterface.generated.h"
+#include "UnrealSodiumBlueprintInterface.generated.h"
 
 UCLASS()
-class USodiumUE5PluginBPLibrary : public UBlueprintFunctionLibrary
+class UUnrealSodiumPluginBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 

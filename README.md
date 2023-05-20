@@ -1,4 +1,6 @@
-# About SodiumUE5
+![UnrealSodium](https://raw.githubusercontent.com/helium-labs/UnrealSodium/master/logo.png)
+============
+
 An easy to use public and private cryptography plugin for Unreal Engine 5 based on libsodium.
 
 It currently works only on Win64 builds of UE5. Support for Android, iOS, Linux and MacOS are planned, but not guaranteed to happen. The plugin is very simple due to the portable nature of libsodium and it is compatible with most versions of UE5.
@@ -10,12 +12,12 @@ Last tested on: **5.1.0**
 1. *git clone --recursive* this repository to your UnrealProject/Plugins/ folder.
 2. In the Source\ThirdParty\libsodium\libsodium.sln, change the Visual Studio platform toolset to v142 to match the Unreal Engine 5 VS configuration and then compile it. This step will generate the sodium library. Use x64 and Release options as target.
 3. Regenerate code for your UE5 project (right click YourGame.uproject to do it)
-4. Add "SodiumUE5" to YourGame.Build.cs in PublicDependencyModuleNames.
+4. Add "UnrealSodium" to YourGame.Build.cs in PublicDependencyModuleNames.
 5. Open and Build your game in Visual Studio.
-6. Start the editor as usual, allow it to compile SodiumUE5, this should only happen once.
+6. Start the editor as usual, allow it to compile UnrealSodium, this should only happen once.
 7. Build/Package your game as you normally would.
 
-Contributions are warmly welcomed to further enhance the compatibility and usability of SodiumUE5 with UE5. 
+Contributions are warmly welcomed to further enhance the compatibility and usability of Unreal Engine Sodium with UE5. 
 
 # Usage
 
@@ -46,4 +48,4 @@ https://opensource.org/licenses/ISC
 
 # Tags
 
-libsodium, encryption, cryptography, UnrealEngine, UnrealEngine5, UE5, SodiumUE5, game-development, encryption-library, game-engine, game-plugin
+libsodium, encryption, cryptography, UnrealEngine, UnrealEngine5, UE5, UnrealSodium, libsodium-ue5, game-development, encryption-library, game-engine, game-plugin

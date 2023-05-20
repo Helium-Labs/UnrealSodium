@@ -1,0 +1,25 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "UnrealSodium",
+	"Description": "Cryptography library for UE5 based on libsodium",
+	"Category": "Encryption",
+	"CreatedBy": "Helium Labs",
+	"CreatedByURL": "https://github.com/Helium-Labs",
+	"DocsURL": "https://github.com/Helium-Labs/UESodium",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/Helium-Labs/UESodium",
+	"EnabledByDefault": false,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "UnrealSodium",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault",
+			"WhitelistPlatforms": [ "Win64" ]
+		}
+	]
+}
