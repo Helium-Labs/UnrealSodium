@@ -46,6 +46,11 @@ https://opensource.org/licenses/MIT
 ## libsodium license:
 https://opensource.org/licenses/ISC
 
+## Legal Disclaimer
+
+We reserve the right to change anything at anytime, without notice. Anything said is not necessarily represenative of the final product. No liabilities or warranties whatsoever, per the attached license.
+
 # Tags
 
 libsodium, encryption, cryptography, UnrealEngine, UnrealEngine5, UE5, UnrealSodium, libsodium-ue5, game-development, encryption-library, game-engine, game-plugin
+
