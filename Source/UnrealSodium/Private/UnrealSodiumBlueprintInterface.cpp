@@ -96,7 +96,7 @@ void UUnrealSodiumPluginBPLibrary::Encrypt(TArray<uint8> data, TArray<uint8> pub
 	}
   
 	auto sodium = FUnrealSodiumModule::Get();
-	success = sodium.Encrypt(encrypted, data, publicKey) == 0 ? true : false;
+	success = sodium.Encrypt(encrypted, data, publicKey) == 0;
 }
 
 void UUnrealSodiumPluginBPLibrary::Decrypt(TArray<uint8> encrypted, TArray<uint8> publicKey, TArray<uint8> privateKey, TArray<uint8>& decrypted, bool& success) {
@@ -106,7 +106,7 @@ void UUnrealSodiumPluginBPLibrary::Decrypt(TArray<uint8> encrypted, TArray<uint8
 	}
   
 	auto sodium = FUnrealSodiumModule::Get();
-	success = sodium.Decrypt(decrypted, encrypted, publicKey, privateKey) == 0 ? true : false;
+	success = sodium.Decrypt(decrypted, encrypted, publicKey, privateKey) == 0;
 }
 
 void UUnrealSodiumPluginBPLibrary::EncryptAuthenticated(TArray<uint8> data, TArray<uint8> publicKey, TArray<uint8> privateKey, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success) {
@@ -116,7 +116,7 @@ void UUnrealSodiumPluginBPLibrary::EncryptAuthenticated(TArray<uint8> data, TArr
 	}
   
 	auto sodium = FUnrealSodiumModule::Get();
-	success = sodium.EncryptAuthenticated(encrypted, data, nonce, publicKey, privateKey) == 0 ? true : false;
+	success = sodium.EncryptAuthenticated(encrypted, data, nonce, publicKey, privateKey) == 0;
 }
 
 void UUnrealSodiumPluginBPLibrary::DecryptAuthenticated(TArray<uint8> encrypted, TArray<uint8> publicKey, TArray<uint8> privateKey, TArray<uint8> nonce, TArray<uint8>& decrypted, bool& success) {
@@ -126,7 +126,7 @@ void UUnrealSodiumPluginBPLibrary::DecryptAuthenticated(TArray<uint8> encrypted,
 	}
   
 	auto sodium = FUnrealSodiumModule::Get();
-	success = sodium.DecryptAuthenticated(decrypted, encrypted, nonce, publicKey, privateKey) == 0 ? true : false;
+	success = sodium.DecryptAuthenticated(decrypted, encrypted, nonce, publicKey, privateKey) == 0;
 }
 
 void UUnrealSodiumPluginBPLibrary::EncryptSymmetric(TArray<uint8> data, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success) {
@@ -136,7 +136,7 @@ void UUnrealSodiumPluginBPLibrary::EncryptSymmetric(TArray<uint8> data, TArray<u
 	}
 
 	auto sodium = FUnrealSodiumModule::Get();
-	success = (sodium.EncryptSymmetric(encrypted, data, nonce, key) > 0);
+	success = sodium.EncryptSymmetric(encrypted, data, nonce, key) == 0;
 }
 
 void UUnrealSodiumPluginBPLibrary::DecryptSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& decrypted, bool& success) {
@@ -146,7 +146,7 @@ void UUnrealSodiumPluginBPLibrary::DecryptSymmetric(TArray<uint8> encrypted, TAr
 	}
 
 	auto sodium = FUnrealSodiumModule::Get();
-	success = (sodium.DecryptSymmetric(decrypted, encrypted, nonce, key) > 0);
+	success = sodium.DecryptSymmetric(decrypted, encrypted, nonce, key) == 0;
 }
 
 TArray<uint8> UUnrealSodiumPluginBPLibrary::GenerateKey() {
