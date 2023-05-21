@@ -153,6 +153,42 @@ TArray<uint8> UUnrealSodiumPluginBPLibrary::GenerateKey() {
 	return FUnrealSodiumModule::Get().GenerateKey();
 }
 
+void UUnrealSodiumPluginBPLibrary::GenerateAES256GCMKey(TArray<uint8>& key, bool& success)
+{
+	auto sodium = FUnrealSodiumModule::Get();
+	success = sodium.GenerateAES256GCMKey(key) == 0;
+}
+
+void UUnrealSodiumPluginBPLibrary::GenerateAES256GCMNonce(TArray<uint8>& generatedNonce)
+{
+	auto sodium = FUnrealSodiumModule::Get();
+	sodium.GenerateAES256GCMNonce(generatedNonce);
+}
+
+void UUnrealSodiumPluginBPLibrary::EncryptStringAES256GCMSymmetric(FString s, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success)
+{
+	auto sodium = FUnrealSodiumModule::Get();
+
+	TArray<uint8> data;
+	FTCHARToUTF8 Convert(*s);
+	data.Append((uint8*)Convert.Get(), Convert.Length());
+
+	success = sodium.EncryptAES256GCM(encrypted, data, nonce, key) == 0;
+}
+
+void UUnrealSodiumPluginBPLibrary::DecryptStringAES256GCMSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, FString& decrypted, bool& success)
+{
+	auto sodium = FUnrealSodiumModule::Get();
+	TArray<uint8> data;
+	success = sodium.DecryptAES256GCM(data, encrypted, nonce, key) == 0;
+	if (success) {
+		decrypted = FString(UTF8_TO_TCHAR(data.GetData()));
+	}
+	else {
+		decrypted = FString();
+	}
+}
+
 void UUnrealSodiumPluginBPLibrary::EncryptStringSymmetric(FString s, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success) {
 	if (!SanityCheckPass(key)) {
 		success = false;

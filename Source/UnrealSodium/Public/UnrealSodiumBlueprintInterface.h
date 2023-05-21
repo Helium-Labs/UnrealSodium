@@ -74,6 +74,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
 	static TArray<uint8> GenerateKey();
 
+	// AES256
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
+	static void GenerateAES256GCMKey(TArray<uint8>& key, bool& success);
+
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
+	static void GenerateAES256GCMNonce(TArray<uint8>& generatedNonce);
+
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
+	static void EncryptStringAES256GCMSymmetric(FString s, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success);
+
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
+	static void DecryptStringAES256GCMSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, FString& decrypted, bool& success);
+
 	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
 	static TArray<uint8> GenerateSymmetricNonce();
 
