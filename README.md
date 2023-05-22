@@ -134,7 +134,7 @@ https://opensource.org/licenses/ISC
 
 ## Legal Disclaimer
 
-We reserve the right to change anything at anytime, without notice. Anything said is not necessarily represenative of the final product. No liabilities or warranties whatsoever, per the attached license.
+We reserve the right to change anything at anytime, without notice. Anything said is not necessarily represenative of the final product. No liabilities or warranties whatsoever, per the attached license. Any "misinformation" is not intentional & you can't do anything about it other than raise a GitHub issue.
 
 # Tags
 
