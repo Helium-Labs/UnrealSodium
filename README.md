@@ -23,6 +23,53 @@ Contributions are warmly welcomed to further enhance the compatibility and usabi
 
 ![Public encryption](http://i.imgur.com/ezgBj7v.jpg)
 
+# Available Blueprint Functions
+## Random Number Generation
+
+On Unix-based systems and on Windows, Sodium uses the facilities provided by the operating system when generating random numbers is required (CS PRNG or TRNG).
+
+*   `RandomBytes(int32 len)` : Generates a sequence of random bytes with the specified length.
+## Encoding
+### Base64
+*   `ToBase64(TArray<uint8> data)` : Converts the input byte array into a base64-encoded string.
+*   `ToBase64S(FString data)` : Converts the input string into a base64-encoded string.
+*   `FromBase64(FString data, bool& success)` : Converts a base64-encoded string into a byte array. Returns the success of the operation.
+*   `FromBase64S(FString data, bool& success)` : Converts a base64-encoded string back into a normal string. Returns the success of the operation.
+## One-Way Hashing
+### Sha256
+*   `ToSha256Hash(TArray<uint8> data, TArray<uint8>& hashedData, bool& success)` : Converts the input byte array into a SHA256 hashed byte array. Returns the success of the operation.
+*   `ToSha256HashAsB64String(TArray<uint8> data, FString& hashedData, bool& success)` : Converts the input byte array into a SHA256 hashed base64 string. Returns the success of the operation.
+### Sha512
+*   `ToSha512Hash(TArray<uint8> data, TArray<uint8>& hashedData, bool& success)` : Converts the input byte array into a SHA512 hashed byte array. Returns the success of the operation.
+*   `ToSha512HashAsB64String(TArray<uint8> data, FString& hashedData, bool& success)` : Converts the input byte array into a SHA512 hashed base64 string. Returns the success of the operation.
+## Asymmetric Public Key Cryptography
+### X25519 Key derivation
+*   `GenerateKeyPair(TArray<uint8>& publicKey, TArray<uint8>& privateKey)` : Generates a public and private key pair.
+### XSalsa20 Stream Cipher
+*   `EncryptString(FString s, TArray<uint8> publicKey, TArray<uint8>& encrypted, bool& success)` : Encrypts a string with a public key using XSalsa20-Poly1305.
+*   `DecryptString(TArray<uint8> encrypted, TArray<uint8> publicKey, TArray<uint8> privateKey, FString& decrypted, bool& success)` : Decrypts a string with a public key and a private key using XSalsa20-Poly1305.
+*   `Encrypt(TArray<uint8> data, TArray<uint8> publicKey, TArray<uint8>& encrypted, bool& success)` : Encrypts a byte array with a public key using XSalsa20-Poly1305.
+*   `Decrypt(TArray<uint8> encrypted, TArray<uint8> publicKey, TArray<uint8> privateKey, TArray<uint8>& decrypted, bool& success)` : Decrypts a byte array with a public key and a private key using XSalsa20-Poly1305.
+*   `EncryptAuthenticated(TArray<uint8> data, TArray<uint8> publicKey, TArray<uint8> privateKey, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success)` : Encrypts a byte array with a public key, private key, and nonce using XSalsa20-Poly1305 with Poly1305 for authentication.
+*   `DecryptAuthenticated(TArray<uint8> encrypted, TArray<uint8> publicKey, TArray<uint8> privateKey, TArray<uint8> nonce, TArray<uint8>& decrypted, bool& success)` : Decrypts an authenticated byte array with a public key, private key, and nonce using XSalsa20-Poly1305 with Poly1305 for authentication.
+## Symmetric Secret Key Cryptography
+### XSalsa20 Stream Cipher
+*   `EncryptStringSymmetric(FString s, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success)` : Encrypts a string with a key and a nonce using XSalsa20.
+*   `DecryptStringSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, FString& decrypted, bool& success)` : Decrypts a string with a key and a nonce using XSalsa20.
+*   `EncryptSymmetric(TArray<uint8> data, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success)` : Encrypts a byte array with a key and a nonce using XSalsa20.
+*   `DecryptSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& decrypted, bool& success)` : Decrypts a byte array with a key and a nonce using XSalsa20.
+### AES Block Cipher
+Despite its popularity in TLS, the secure application of AES-GCM outside this context is complex, especially when encrypting more than ~350GB of data with a specific key. Additionally, unique nonces are crucial for maintaining security in AES-GCM, though setting up atomic counters for this purpose can be challenging in a distributed environment. Make sure the nonces aren't repeated for a given secret key. Nonces are 12 bytes, and have a similar purpose to the Initialization Vector (IV) (used in-place of IV).
+
+*   `GenerateAES256GCMKey(TArray<uint8>& key, bool& success)` : Generates an AES256-GCM encryption key. The success of the operation is returned.
+*   `GenerateAES256GCMNonce(TArray<uint8>& generatedNonce)` : Generates a nonce for AES256-GCM encryption.
+*   `EncryptStringAES256GCMSymmetric(FString s, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success)` : Encrypts a string with a key and a nonce using AES256-GCM. The success of the operation is returned.
+*   `DecryptStringAES256GCMSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, FString& decrypted, bool& success)` : Decrypts a string with a key and a nonce using AES256-GCM. The success of the operation is returned.
+
+## Key Exchange
+*   `DeriveX25519SharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair with X25519 ECDH scalar mult.
+*   `DeriveX25519Sha256HashedSharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair using the X25519 ECDH, and then SHA256 hashes the result the public keys in ascending order for enhanced security.
+
 # What exactly is the Libsodium Cryptography Library?
 
 ![libsodium](https://raw.github.com/jedisct1/libsodium/master/logo.png)
