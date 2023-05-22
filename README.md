@@ -112,6 +112,11 @@ Together, these algorithms provide a robust set of tools for securing digital co
 
 - **Poly1305**: A universal hash function designed by Bernstein, Poly1305 was initially part of the Poly1305-AES authenticator that combined Poly1305 with AES-128. It was later applied with a single-use key per message in XSalsa20 and ChaCha20, contributing to the ChaCha20-Poly1305 authenticated cipher deployed in TLS on the internet.
 
+## Web Browser Support (as of 2023 Q2)
+
+Native WebCrypto API lacks support for many of Daniel J. Bernstein's cryptographic primitives. However, third-party libraries fill this gap. [Noble library](https://github.com/paulmillr/noble-curves), by Paul Miller, offers audited, zero-dependency implementations of most of Bernstein's work. `UnrealSodium` aims for compatibility with WebCrypto and Noble library. E.g. employing SHA256 instead of Blake2 for shared secret derivation with the `DeriveX25519Sha256HashedSharedSecret` function.
+
+
 ## References
 
 - ["The NSA Continues to Violate Americans' Internet Privacy Rights"](https://www.wired.com/story/nsa-backdoor-encryption-security-roundup/), Wired, 2019.
@@ -119,7 +124,7 @@ Together, these algorithms provide a robust set of tools for securing digital co
 - ["Salsa20"](https://en.wikipedia.org/wiki/Salsa20), Wikipedia, The Free Encyclopedia.
 - ["Curve25519"](https://en.wikipedia.org/wiki/Curve25519), Wikipedia, The Free Encyclopedia.
 - ["Daniel J. Bernstein"](https://en.wikipedia.org/wiki/Daniel_J._Bernstein), Wikipedia, The Free Encyclopedia.
-
+- ["Noble Curves by Paul Miller"](https://github.com/paulmillr/noble-curves), Github.
 
 # License
 https://opensource.org/licenses/MIT
