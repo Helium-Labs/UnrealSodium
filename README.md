@@ -7,6 +7,8 @@ It currently works only on Win64 builds of UE5. Support for Android, iOS, Linux 
 
 Last tested on: **5.1.0**
 
+⭐ Show your support by starring this repo ⭐
+
 ## Installation
 
 1. *git clone --recursive* this repository to your UnrealProject/Plugins/ folder.
