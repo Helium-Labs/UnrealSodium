@@ -70,7 +70,7 @@ Despite its popularity in TLS, the secure application of AES-GCM outside this co
 *   `DeriveX25519SharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair with X25519 ECDH scalar mult.
 *   `DeriveX25519Sha256HashedSharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair using the X25519 ECDH, and then SHA256 hashes the result the public keys in ascending order for enhanced security.
 
-# What exactly is the Libsodium Cryptography Library?
+# Libsodium Cryptography Library
 
 ![libsodium](https://raw.github.com/jedisct1/libsodium/master/logo.png)
 
@@ -78,13 +78,47 @@ Libsodium is a modern, versatile software library designed for encryption, decry
 
 Originating as a fork of [NaCl](http://nacl.cr.yp.to/), it offers a compatible API and additional enhancements to further improve usability. Its goal is to offer core operations essential for the development of higher-level cryptographic tools.
 
-One of Libsodium's strengths is its portability. It is cross-compilable and supports a wide array of compilers and operating systems, including Windows (MingW or Visual Studio, x86 and x64), iOS, Android, along with Javascript and Webassembly compatibility.
+One of Libsodium's strengths is its portability. It is cross-compilable and supports a wide array of compilers and operating systems, including Windows (MingW or Visual Studio, x86 and x64), iOS, Android, along with Javascript and Webassembly compatibility. 
+
+The library is opinionated, and prioritises the work of **Daniel J. Bernstein** described in the section below for reasons it addresses.
 
 ## Documentation
 You can access the official documentation [here](https://doc.libsodium.org), which is maintained on Gitbook and built from the [libsodium-doc](https://github.com/jedisct1/libsodium-doc) repository.
 
 ## Integrity Checking
 Detailed integrity checking instructions, including the signing key for Libsodium, can be found in the [installation](https://download.libsodium.org/doc/installation#integrity-checking) section of the documentation.
+
+# Daniel J. Bernstein and His Contributions to Cryptography
+
+Daniel J. Bernstein is an eminent figure in the field of cryptography, notable for the development of cryptographic algorithms such as the stream ciphers Salsa20 and ChaCha20, and the elliptic curve Curve25519. His groundbreaking work began in 2005 when he proposed Salsa20 and Curve25519. By 2008, he had introduced ChaCha20 as a variant of Salsa20. A major leap came when his cryptographic algorithms were adopted into popular software such as OpenSSH and OpenBSD, thereby impacting the wider digital security landscape.
+
+However, the importance of Bernstein's contributions became particularly prominent following Edward Snowden's disclosures of mass surveillance by the NSA, which raised suspicions about potential backdoors in the elliptic curve parameters proposed by the NSA and standardized by NIST. In the wake of these revelations, the tech industry turned towards trustworthy alternatives, including Bernstein's cryptographic designs. For instance, Google adopted ChaCha20 alongside Bernstein's Poly1305 message authentication code for use in TLS, a protocol widely used for internet security. These designs now underpin security in a variety of applications, including Apple iOS, the Linux kernel, OpenSSH, Tor, and Algorand.
+
+## The Impact and Integration of Bernstein's Cryptographic Primitives
+
+Bernstein's cryptographic primitives—Salsa20, ChaCha20, Curve25519, and Poly1305—have been transformative for cryptography and digital security. Salsa20, designed in 2005, and its subsequent variant ChaCha20, introduced in 2008, are stream ciphers that provide efficient and secure keystream access. Curve25519, an elliptic curve Bernstein proposed for public-key schemes, is known for its performance, simplicity, and resistance to many common implementation pitfalls, including timing attacks. Notably, Curve25519 uses a Montgomery curve for its operations, offering certain computational benefits.
+
+Poly1305, a universal hash function Bernstein designed, originally formed part of Poly1305-AES, an authenticator that combined Poly1305 with AES-128. It was later integrated with a single-use key per message in XSalsa20 and ChaCha20 in the ChaCha20-Poly1305 authenticated cipher used in TLS on the internet.
+
+Together, these algorithms provide a robust set of tools for securing digital communications. They have not only found their place in software like OpenSSH and OpenBSD but also influenced the design of the Libsodium library, a modern, easy-to-use software library for encryption, decryption, signatures, password hashing, and more, which incorporates Bernstein's cryptographic algorithms.
+
+## Daniel J. Bernstein's Cryptographic Primitives
+
+- **Salsa20**: A stream cipher that Bernstein proposed in 2005. This cipher is notable for its security and efficiency in providing keystream access.
+
+- **ChaCha20**: A variant of Salsa20 introduced by Bernstein in 2008. It enhances the diffusion of Salsa20 and offers performance improvements on certain architectures.
+
+- **Curve25519**: This is an elliptic curve proposed by Bernstein in 2005 for use in public-key schemes. It's renowned for its performance, simplicity, and resistance to many common implementation pitfalls such as timing attacks. Notably, it utilizes a Montgomery curve for its operations.
+
+- **Poly1305**: A universal hash function designed by Bernstein, Poly1305 was initially part of the Poly1305-AES authenticator that combined Poly1305 with AES-128. It was later applied with a single-use key per message in XSalsa20 and ChaCha20, contributing to the ChaCha20-Poly1305 authenticated cipher deployed in TLS on the internet.
+
+## References
+
+- ["The NSA Continues to Violate Americans' Internet Privacy Rights"](https://www.wired.com/story/nsa-backdoor-encryption-security-roundup/), Wired, 2019.
+- ["Poly1305"](https://en.wikipedia.org/wiki/Poly1305), Wikipedia, The Free Encyclopedia.
+- ["Salsa20"](https://en.wikipedia.org/wiki/Salsa20), Wikipedia, The Free Encyclopedia.
+- ["Curve25519"](https://en.wikipedia.org/wiki/Curve25519), Wikipedia, The Free Encyclopedia.
+- ["Daniel J. Bernstein"](https://en.wikipedia.org/wiki/Daniel_J._Bernstein), Wikipedia, The Free Encyclopedia.
 
 
 # License
