@@ -89,6 +89,30 @@ FString UUnrealSodiumPluginBPLibrary::FromBase64S(FString data, bool& success) {
 	return dest;
 }
 
+void UUnrealSodiumPluginBPLibrary::ToSha256Hash(TArray<uint8> data, TArray<uint8>& hashedData, bool& success) {
+	auto sodium = FUnrealSodiumModule::Get();
+	success = sodium.SHA256HashBytes(data, hashedData) == 0;
+}
+
+void UUnrealSodiumPluginBPLibrary::ToSha256HashAsB64String(TArray<uint8> data, FString& hashedData, bool& success) {
+	auto sodium = FUnrealSodiumModule::Get();
+	TArray<uint8> hashedDataBytes;
+	success = sodium.SHA256HashBytes(data, hashedDataBytes) == 0;
+	hashedData = FBase64::Encode(hashedDataBytes);
+}
+
+void UUnrealSodiumPluginBPLibrary::ToSha512Hash(TArray<uint8> data, TArray<uint8>& hashedData, bool& success) {
+	auto sodium = FUnrealSodiumModule::Get();
+	success = sodium.SHA512HashBytes(data, hashedData) == 0;
+}
+
+void UUnrealSodiumPluginBPLibrary::ToSha512HashAsB64String(TArray<uint8> data, FString& hashedData, bool& success) {
+	auto sodium = FUnrealSodiumModule::Get();
+	TArray<uint8> hashedDataBytes;
+	success = sodium.SHA512HashBytes(data, hashedDataBytes) == 0;
+	hashedData = FBase64::Encode(hashedDataBytes);
+}
+
 void UUnrealSodiumPluginBPLibrary::Encrypt(TArray<uint8> data, TArray<uint8> publicKey, TArray<uint8>& encrypted, bool& success) {
 	if (!SanityCheckPass(publicKey)){
 		success = false;
@@ -187,6 +211,16 @@ void UUnrealSodiumPluginBPLibrary::DecryptStringAES256GCMSymmetric(TArray<uint8>
 	else {
 		decrypted = FString();
 	}
+}
+
+void UUnrealSodiumPluginBPLibrary::DeriveX25519SharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success) {
+	auto sodium = FUnrealSodiumModule::Get();
+	success = sodium.DeriveX25519SharedSecret(sharedSecret, theirPublicKey, myPublicKey, myPrivateKey) == 0;
+}
+
+void UUnrealSodiumPluginBPLibrary::DeriveX25519Sha256HashedSharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success) {
+	auto sodium = FUnrealSodiumModule::Get();
+	success = sodium.DeriveX25519Sha256HashedSharedSecret(sharedSecret, theirPublicKey, myPublicKey, myPrivateKey) == 0;
 }
 
 void UUnrealSodiumPluginBPLibrary::EncryptStringSymmetric(FString s, TArray<uint8> key, TArray<uint8> nonce, TArray<uint8>& encrypted, bool& success) {

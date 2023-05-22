@@ -33,6 +33,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
 	static FString FromBase64S(FString data, bool& success);
 
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
+	static void ToSha256Hash(TArray<uint8> data, TArray<uint8>& hashedData, bool& success);
+
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
+	static void ToSha256HashAsB64String(TArray<uint8> data, FString& hashedData, bool& success);
+
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
+	static void ToSha512Hash(TArray<uint8> data, TArray<uint8>& hashedData, bool& success);
+
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
+	static void ToSha512HashAsB64String(TArray<uint8> data, FString& hashedData, bool& success);
 
 	//////////////////////////////////////////////////////////////////////////
 	// Core functionality
@@ -86,6 +97,17 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
 	static void DecryptStringAES256GCMSymmetric(TArray<uint8> encrypted, TArray<uint8> key, TArray<uint8> nonce, FString& decrypted, bool& success);
+
+	// Key exchange
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
+	static void DeriveX25519SharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success);
+
+	/*
+	* Create a temporary derived X25519 shared secret, then create a sha256 hash of (derivedSharedSecret + pk_A + pk_B)
+	* where pk_A is the smallest of the two public keys and pk_B is the largest of the two public keys (to ensure that the same hash is generated on both sides).
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Sodium|Core")
+	static void DeriveX25519Sha256HashedSharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success);
 
 	UFUNCTION(BlueprintCallable, Category = "Sodium|Utility")
 	static TArray<uint8> GenerateSymmetricNonce();
