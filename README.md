@@ -70,7 +70,7 @@ Despite its popularity in TLS, the secure application of AES-GCM outside this co
 
 ## Key Exchange
 *   `DeriveX25519SharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair with X25519 ECDH scalar mult.
-*   `DeriveX25519Sha256HashedSharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair using the X25519 ECDH, and then SHA256 hashes the result the public keys in ascending order for enhanced security.
+*   `DeriveX25519Sha256HashedSharedSecret(TArray<uint8> theirPublicKey, TArray<uint8> myPublicKey, TArray<uint8> myPrivateKey, TArray<uint8>& sharedSecret, bool& success)` : Derives a shared secret from the other party's public key and your own key pair using the X25519 ECDH, and then SHA256 hashes the result with the public keys in ascending order for enhanced security.
 
 # Libsodium Cryptography Library
 
