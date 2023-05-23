@@ -1,7 +1,4 @@
 #include "UnrealSodium.h"
-#include "UnrealSodiumPrivatePCH.h"
-#include "Core.h"
-#include "Interfaces/IPluginManager.h"
 #include "Misc/Base64.h"
 
 #define LOCTEXT_NAMESPACE "FUnrealSodiumModule"

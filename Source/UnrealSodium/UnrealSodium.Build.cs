@@ -7,22 +7,6 @@ public class UnrealSodium : ModuleRules
 {
     public UnrealSodium(ReadOnlyTargetRules Target) : base(Target)
 	{
-        /*
-        string sodiumUnrealHeaders = Path.Combine(ModuleDirectory, "./Public/");
-
-        PublicIncludePaths.AddRange(
-			new string[] {
-                sodiumUnrealHeaders,
-                sodiumIncludes
-			}
-		);
-
-        string sodiumUnrealDefinitions = Path.Combine(ModuleDirectory, "./Private/");
-        PrivateIncludePaths.AddRange(new string[] {
-            sodiumUnrealDefinitions
-        });
-        */
-
         PublicDefinitions.Add("SODIUM_STATIC=1");
         PublicDefinitions.Add("SODIUM_EXPORT=");
 

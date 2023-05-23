@@ -1,11 +1,12 @@
 #pragma once
 
+#include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 #include "HAL/Platform.h"
 #include "GenericPlatform/GenericPlatform.h"
 #include "../../ThirdParty/libsodium/src/libsodium/include/sodium.h"
 
-class FUnrealSodiumModule : public IModuleInterface
+class UNREALSODIUM_API FUnrealSodiumModule : public IModuleInterface
 {
 public:
 

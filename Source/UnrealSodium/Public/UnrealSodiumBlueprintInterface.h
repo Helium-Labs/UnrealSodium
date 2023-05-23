@@ -7,7 +7,7 @@
 #include "UnrealSodiumBlueprintInterface.generated.h"
 
 UCLASS()
-class UUnrealSodiumPluginBPLibrary : public UBlueprintFunctionLibrary
+class UNREALSODIUM_API UUnrealSodiumPluginBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
