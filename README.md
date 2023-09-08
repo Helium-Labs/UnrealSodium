@@ -9,6 +9,10 @@ Last tested on: **5.1.0**
 
 ⭐ Show your support by starring this repo ⭐
 
+# Attribution
+
+UnrealSodium is a fork of [SodiumUE4](https://github.com/maxenko/SodiumUE4), which isn't compatible with UE5 and had a few other issues which this version addresses.
+
 ## Installation
 
 1. *git clone --recursive* this repository to your UnrealProject/Plugins/ folder.
